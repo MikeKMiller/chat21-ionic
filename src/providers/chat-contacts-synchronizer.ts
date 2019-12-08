@@ -37,8 +37,10 @@ export class ChatContactsSynchronizer {
      */
     startSynchro(){
         let that = this;
+        console.log("startSynchro: ");
         this.databaseProvider.getTimestamp()
         .then(function(lastUpdate) { 
+            console.log("lastUpdate: ", lastUpdate);
             that.loadFirebaseContactsData(lastUpdate);
         });
     }
@@ -87,7 +89,6 @@ export class ChatContactsSynchronizer {
         }
         user.fullname = fullname;
         // console.log("fullname:",fullname);
-        
         this.databaseProvider.setTimestamp();
         this.databaseProvider.addContact(user.uid, user.email, user.firstname, user.lastname, user.fullname, user.imageurl);  
     }
@@ -97,6 +98,7 @@ export class ChatContactsSynchronizer {
      * @param child 
      */
     removeContact(child) {
+        // console.log("removeContact", child);
         this.databaseProvider.setTimestamp();
         let user = child;
         this.databaseProvider.removeContact(user.uid);

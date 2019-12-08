@@ -22,6 +22,8 @@ import { ChatManager } from '../../providers/chat-manager/chat-manager';
 import { UserService } from '../../providers/user/user';
 import { MessagingService } from '../../providers/messaging-service';
 
+import { AppConfigProvider } from '../../providers/app-config/app-config';
+
 
 
 @Injectable()
@@ -38,10 +40,12 @@ export class GroupService {
     public http: Http,
     public events: Events,
     public msgService: MessagingService,
+    public appConfig: AppConfigProvider,
     public chatManager: ChatManager,
     public userService: UserService
   ) {
-    this.BASE_URL_LEAVE_GROUP = 'https://us-central1-chat-v2-dev.cloudfunctions.net/';
+    //this.BASE_URL_LEAVE_GROUP = 'https://us-central1-chat-v2-dev.cloudfunctions.net/';
+    this.BASE_URL_LEAVE_GROUP = this.appConfig.getConfig().firebaseConfig.chat21ApiUrl;
     this.observable = new BehaviorSubject<boolean>(null);
     console.log('Hello GroupProvider Provider');
   }
@@ -95,7 +99,8 @@ export class GroupService {
       headers.append('Authorization', 'Bearer ' + token);
 
       const options = new RequestOptions({ headers: headers });
-      const url = that.BASE_URL_LEAVE_GROUP + 'api/' + appId + '/groups/' + uidGroup + '/members/' + uidUser;
+     
+      const url = that.BASE_URL_LEAVE_GROUP + '/api/' + appId + '/groups/' + uidGroup + '/members/' + uidUser;
       console.log('url: ', url);
       console.log('token: ', token);
       const body = {
@@ -132,7 +137,7 @@ export class GroupService {
         headers.append('Authorization', 'Bearer ' + token);
 
         const options = new RequestOptions({ headers: headers });
-        const url = that.BASE_URL_LEAVE_GROUP + 'supportapi/' + appId + '/groups/' + uidGroup;
+        const url = that.BASE_URL_LEAVE_GROUP + '/supportapi/' + appId + '/groups/' + uidGroup;
         const body = {};
         console.log('---------------> 1 - url: ', url);
         console.log('---------------> 2 - options: ', options);

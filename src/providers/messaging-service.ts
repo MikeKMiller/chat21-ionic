@@ -58,8 +58,15 @@ export class MessagingService {
     }
 
     initMessage() {
+      try {
         this.messaging = firebase.messaging();
         console.log('initMessage:::: ', this.messaging);
+      }
+      catch(err) {
+        console.log('error initializing firebase messaging system');
+      }
+      
+        
         // //navigator.serviceworker.register('/XXXXX/sw.js', {scope: '/XXXX/non-existant-path/')
         // navigator.serviceWorker.register(SERVICE_WORKER_DEV, {scope: "firebase-cloud-messaging-push-scope"})
         // .then(function (registration) {
@@ -76,6 +83,8 @@ export class MessagingService {
      * 
      */
     getPermission() {
+       try {
+        
         console.log('Notification getPermission.');
         const that = this;
         // Request permission and get token.....
@@ -93,6 +102,13 @@ export class MessagingService {
             that.events.publish('requestPermission', false);
             console.log('Unable to get permission to notify.');
         });
+         
+      }
+      catch(err) {
+        console.log('error getPermission firebase messaging system');
+      }
+      
+        
         
 
         // navigator.serviceWorker.register('./firebase-messaging-sw.js')
@@ -139,7 +155,8 @@ export class MessagingService {
     }
   
     getToken(){
-        // Get Instance ID token. Initially this makes a network call, once retrieved
+      try {
+         // Get Instance ID token. Initially this makes a network call, once retrieved
         // subsequent calls to getToken will return from cache.
         let that = this;
         //firebase.messaging().getToken()
@@ -166,6 +183,12 @@ export class MessagingService {
             //showToken('Error retrieving Instance ID token. ', err);
             //setTokenSentToServer(false);
         });
+      }
+      catch(err) {
+        console.log('error gettting token firebase messaging system');
+      }
+      
+       
     }
 
     // returnToken(): string {
@@ -227,10 +250,15 @@ export class MessagingService {
     }
 
     receiveMessage() {
+      try {
         this.messaging.onMessage((payload) => {
             console.log("OKKKK -------------> Message received. ", payload);
             //this.currentMessage.next(payload)
         });
+      }
+      catch(err) {
+        console.log('error receviving message');
+      }
     }
 
     returnToken(){

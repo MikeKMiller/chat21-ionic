@@ -1,13 +1,21 @@
 # chat21-ionic ver 1.0
+### 1.0.18B
+- load firebase-config in assets
 
-### next release 
-- (fatto) immagine senza bordo nel msg conversazione
-- (fatto) apri immagine nel dettaglio conversazione in una nw finestra
-- (da fare) aggiungere gallery immagini
-- (da fare) aggiungo br nel messaggio
-- (da fare) ottimizzare view contatti (css header, titolo, <-, img profile, cache)
-- (da fare) visualizzare alert errore su browser che non supportano sdk firebase
-- (da fare) se ho abbandonato il gruppo disabilito campo input
+### 1.0.18
+- change BASE_URL (get it from remote)
+- add chat21ApiUrl in firebaseConfig
+
+### 1.0.17
+- new - change font size .messageFirst from 1.4em to 1.2em
+- new - change font size .content_message_wellcome from 1.4em to 1.2em
+- new - open detail conversation from url parameters 'recipient' and 'recipientFullname'
+- new - manage photo disabled on support.tiledesk.com
+
+### 1.0.16
+- fixes bug contacts in chat-manager
+- fixes bug new user registration
+
 
 ### 1.0.15
 - change css modal PopoverPage

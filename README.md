@@ -17,7 +17,10 @@ With Chat21-ionic you can:
 
 # Live Demo #
 Visit https://web.chat21.org/ to see a live demo of chat21-ionic.
-<img src="http://www.dariodepascalis.com/wp-content/uploads/2017/10/chat21-ionic-desk-new.png" alt="A screenshot of chat21-ionic demo" style="max-width:100%;">
+
+<img src="https://user-images.githubusercontent.com/9556761/57692753-df24d780-7647-11e9-9505-82ee5288637c.png" alt="A screenshot of chat21-ionic demo" style="max-width:100%;">
+
+<img src="https://user-images.githubusercontent.com/9556761/57692765-e3e98b80-7647-11e9-8afe-b21e6085d7ca.png" alt="A screenshot of chat21-ionic demo" style="max-width:100%;">
 
 # Documentation #
 In progress
@@ -36,6 +39,7 @@ In progress
 # Firebase Configuration #
 * Create account Firebase
 * Create a Firebase project in the Firebase console, if you don't already have one. https://console.firebase.google.com/
+* Deploy Chat21 Firebase Cloud Functions as described here: https://github.com/chat21/chat21-cloud-functions
 
 ## Firebase DB Configuration ## 
 * in the Firebase console click 'Add Firebase to your web app' and copy 
@@ -66,17 +70,16 @@ In the Firebase Console open the Authentication section > SIGN IN METHOD tab you
 https://firebase.google.com/docs/auth/
 * Update app.module.ts: 
     * open `/src/app/app.module.ts` and change tenant name (optional)
-* Update firebase-messaging-sw.js: 
+* For Push Notification update firebase-messaging-sw.js: 
     * open `/src/firebase-messaging-sw.js` and replace messagingSenderId: "..." with < your messagingSenderId >
     More info here :  https://angularfirebase.com/lessons/send-push-notifications-in-angular-with-firebase-cloud-messaging/
+    * firebase-messaging-sw.js must be accessible without context for example (https://support.tiledesk.com/firebase-messaging-sw.js) 
 * Update manifest.json: 
     * open `/src/manifest.json` and replace "name": "chat21-ionic" and "short_name": "chat21-ionic" with the name of your project (optional)
+* Update app constants in `src/utils/constants.ts`
 
 ## Run App on Browser ##
 * Now you will need to serve the app. Run: `ionic serve` in the terminal. (Update the plugins if required)
-
-## Deploy Chat21 Firebase Cloud Functions  ##
-* Readme: https://github.com/chat21/chat21-cloud-functions
 
 ## Create build browser ##
 * Run: `cordova platform add browser@latest`

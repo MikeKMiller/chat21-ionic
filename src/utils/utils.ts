@@ -508,8 +508,20 @@ export function isURL(str: string) {
 
 export function isHostname(){
   const hostname = window.location.hostname;
+  // console.log("hostname: ", hostname);
+  // console.log("BASE_URL_HOSTNAME: ", BASE_URL_HOSTNAME);
   if(hostname === BASE_URL_HOSTNAME){return true}
   return false
+}
+
+export function getParameterByName(name:string) {
+  var url = window.location.href;
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
 // export function emailValidator(str) {

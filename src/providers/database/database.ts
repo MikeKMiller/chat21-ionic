@@ -32,6 +32,10 @@ export class DatabaseProvider {
   initialize(loggedUser:UserModel, tenant: string){
     this.loggedUser = loggedUser;
     this.tenant = tenant;
+    console.log("loggedUser::", loggedUser.uid);
+    console.log("this.storageSettings::", this.storageSettings);
+    console.log("this.storageContacts::", this.storageContacts);
+    console.log("this.storageConversations::", this.storageConversations);
     if(!this.storageSettings || !this.storageContacts || !this.storageConversations){
       this.storageSettings = this.configStorage('settings-'+loggedUser.uid);
       this.storageContacts = this.configStorage('contacts-'+loggedUser.uid);
@@ -73,7 +77,7 @@ export class DatabaseProvider {
   setTimestamp(){
     // settings
     let lastUpdate = getNowTimestamp();
-    //console.log("SALVO NEL DB DATA UPDATE:", lastUpdate);
+    // console.log("SALVO NEL DB DATA UPDATE:", lastUpdate);
     //const storageSettings = this.configStorage('settings');
     this.storageSettings.set('lastUpdate',lastUpdate);
   }
@@ -91,7 +95,7 @@ export class DatabaseProvider {
    */
   setUidLastOpenConversation(uid){
     // settings
-    console.log("SALVO NEL DB UID ULTIMA CHAT APERTA:", uid);
+    // console.log("SALVO NEL DB UID ULTIMA CHAT APERTA:", uid);
     //const storageSettings = this.configStorage('settings');
     //return storageSettings.set('uidLastOpenConversation',uid)
     this.storageSettings.set('uidLastOpenConversation',uid)
@@ -113,7 +117,7 @@ export class DatabaseProvider {
     //const storageSettings = this.configStorage('contacts');
     return this.storageContacts.forEach( (data, key, index) => {
       limit>0?limit:null;
-      //console.log("INDEX::", index, limit);
+      console.log("INDEX::", index, limit);
       if (index<limit || !limit){
         console.log("This is the value ------> ", data);
         if(data.uid != idCurrentUser){
@@ -121,12 +125,13 @@ export class DatabaseProvider {
         }
       } else {
         // NON FUNZIONA!!! 
+        console.log("LIMIT ---> ", limit);
         //contacts.sort(compareValues('name', 'asc'));
         return Promise.resolve(contacts);
       }
     })
     .then(function() { 
-      //console.log("contacts:", contacts); 
+      console.log("contacts:", contacts); 
       //contacts.sort(compareValues('name', 'asc'));
       return contacts;
     });
